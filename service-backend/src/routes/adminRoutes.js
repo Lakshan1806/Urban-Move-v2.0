@@ -1,4 +1,4 @@
-import express from "express";
+import express from "express"; 
 import adminController from "../controllers/admin/adminController.js";
 import adminUpload from "../middlewares/adminMulter.js";
 import carUpload from "../middlewares/carsMulter.js";
