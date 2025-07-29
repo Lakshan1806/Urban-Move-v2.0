@@ -1,5 +1,5 @@
 import Logo from "../assets/animated-logo.gif";
-import Loading from "../assets/loading.gif";
+import Loading from "../assets/throbber.gif";
 
 function PrimaryLoadingScreen() {
   return (

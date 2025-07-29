@@ -1,4 +1,4 @@
-import Loading from "../assets/Loading.gif";
+import Loading from "../assets/throbber.gif";
 
 function SecondaryLoadingScreen() {
   return (
