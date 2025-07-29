@@ -1,6 +1,6 @@
 import Admin from "../../../models/admin.model.js";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken"; 
+import jwt from "jsonwebtoken";
 
 const adminAuthController = {
   login: async (req, res) => {
@@ -14,7 +14,7 @@ const adminAuthController = {
       const admin = await Admin.findOne({ username }).select({
         password: 1,
         username: 1,
-        role: 1, 
+        role: 1,
       });
       if (!admin) {
         return res.status(404).json({ message: "Admin not found" });
@@ -39,7 +39,6 @@ const adminAuthController = {
         res.status(200).json({ message: "Login successful" });
       }
     } catch (error) {
-      console.error("Login error:", error);
       res.status(500).json({ message: "An unexpected error occurred" });
     }
   },
@@ -52,18 +51,9 @@ const adminAuthController = {
     res.sendStatus(204);
   },
 
-  profile: async (req, res) => {
-    const { token } = req.cookies;
-    if (token) {
-      jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, {}, (err, user) => {
-        if (err) {
-          return res.status(403).json({ error: "Token verification failed" });
-        }
-        res.json(user);
-      });
-    } else {
-      res.json(null);
-    }
+  profile: (req, res) => {
+    const user = req.user;
+    return res.json(user);
   },
 };
 export default adminAuthController;
