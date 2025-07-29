@@ -19,7 +19,6 @@ export function UserContextProvider({ children }) {
         localStorage.removeItem("userData");
         setUser(null);
       } finally {
-        await new Promise((res) => setTimeout(res, 5000));
         setLoading(false);
       }
     }

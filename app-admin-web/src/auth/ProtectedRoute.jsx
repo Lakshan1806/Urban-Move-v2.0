@@ -7,7 +7,7 @@ function ProtectedRoute({ children, allowedRoles = [] }) {
   const { user, loading } = useContext(UserContext);
 
   if (loading) {
-    return <PrimaryLoadingScreen />;
+    return null;
   }
 
   if (!user) {
