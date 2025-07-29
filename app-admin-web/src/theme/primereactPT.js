@@ -3,10 +3,10 @@ import { classNames } from "primereact/utils";
 const primereactPT = {
   toast: {
     root: {
-      className: classNames("w-96", "opacity-90"),
+      className: classNames("w-1/5", "opacity-90"),
     },
     message: ({ state, index }) => ({
-      className: classNames("my-4 rounded-md w-full", {
+      className: classNames("my-4 rounded-3xl w-full", {
         "bg-blue-100 border-solid border-0 border-l-4 border-blue-500 text-blue-700":
           state.messages[index] &&
           state.messages[index].message.severity == "info",
