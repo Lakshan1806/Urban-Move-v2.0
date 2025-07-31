@@ -6,7 +6,7 @@ import { Navigate } from "react-router-dom";
 function AuthContainer() {
   const { user } = useContext(UserContext);
 
-  return  <SignIn />;
+  return user ? <Navigate to="/dashboard"/> : <SignIn />;
 }
 
 export default AuthContainer;
