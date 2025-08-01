@@ -10,17 +10,18 @@ function NavBar() {
     { path: "/drive", label: "Drive" },
   ];
 
-  const linkstyles1 =
-    "font-sans bg-gradient-to-r from-[#FFD12E] to-[#FF7C1D] text-transparent bg-clip-text text-[15px] uppercase";
-
   return (
     <div className="sticky top-0 flex h-full w-full items-center justify-between bg-black p-4">
       <div className="flex justify-center">
         <img src={logo} alt="Logo" className="h-[60px] w-[60px]" />
       </div>
-      <div className="flex gap-8">
+      <div className="flex gap-5">
         {navItems.map((item) => (
-          <Link to={item.path} key={item.path} className={linkstyles1}>
+          <Link
+            to={item.path}
+            key={item.path}
+            className="button-primary uppercase"
+          >
             {item.label}
           </Link>
         ))}
