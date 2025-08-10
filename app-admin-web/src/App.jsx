@@ -1,14 +1,27 @@
-import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import Dashboard from "./components/Dashboard";
+import AuthContainer from "./auth/AuthContainer";
+import axios from "axios";
+import ProtectedRoute from "./auth/ProtectedRoute";
+
+axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.withCredentials = true;
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="debug-outlines">
+      <Routes>
+        <Route path="/" element={<AuthContainer />} />
+        <Route
+          path="/dashboard/*"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </div>
   );
 }
 
