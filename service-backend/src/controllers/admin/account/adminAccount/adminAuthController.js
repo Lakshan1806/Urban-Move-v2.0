@@ -26,7 +26,7 @@ const adminAuthController = {
       if (admin.photo) {
         admin.photo = admin.photo
           .replace(/\\/g, "/")
-          .replace("backend/uploads", "/uploads");
+          .replace("src/uploads", "/uploads");
       }
       const isMatch = await bcrypt.compare(password, admin.password);
 

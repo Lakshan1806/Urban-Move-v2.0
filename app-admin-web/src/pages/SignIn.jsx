@@ -10,7 +10,7 @@ import throbber from "../assets/throbber.gif";
 
 function SignIn() {
   const toast = useRef(null);
-  const { setUser } = useContext(UserContext);
+  const { setAdmin } = useContext(UserContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -42,8 +42,8 @@ function SignIn() {
         life: 1000,
       });
       await new Promise((res) => setTimeout(res, 2000));
-      localStorage.setItem("userData", JSON.stringify(profileRes.data));
-      setUser(profileRes.data);
+      localStorage.setItem("adminData", JSON.stringify(profileRes.data));
+      setAdmin(profileRes.data);
     } catch (err) {
       const status = err.response?.status;
       toast.current.show({
