@@ -4,7 +4,7 @@ import { createContext, useEffect, useState } from "react";
 export const UserContext = createContext({});
 
 export function UserContextProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const [admin, setAdmin] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -12,21 +12,21 @@ export function UserContextProvider({ children }) {
       try {
         const response = await axios.get("/admin/profile");
         const data = response.data;
-        localStorage.setItem("userData", JSON.stringify(data));
-        setUser(data);
+        localStorage.setItem("adminData", JSON.stringify(data));
+        setAdmin(data);
       } catch (error) {
         console.error("Session validation failed:", error);
-        localStorage.removeItem("userData");
-        setUser(null);
+        localStorage.removeItem("adminData");
+        setAdmin(null);
       } finally {
         setLoading(false);
       }
     }
     validateSession();
   }, []);
-
+  
   return (
-    <UserContext.Provider value={{ user, setUser, loading }}>
+    <UserContext.Provider value={{ admin, setAdmin, loading }}>
       {children}
     </UserContext.Provider>
   );
