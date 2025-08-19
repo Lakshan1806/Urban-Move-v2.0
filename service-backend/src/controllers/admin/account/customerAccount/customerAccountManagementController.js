@@ -1,8 +1,8 @@
-import Driver from "../../../models/driver.models.js";
+import User from "../../../../models/usermodel.js";
 import jwt from "jsonwebtoken";
 
-const driverAccountManagementController = {
-  getAllDriver: async (req, res) => {
+const userAccountManagementController = {
+  getAllUser: async (req, res) => {
     const { token } = req.cookies;
     if (token) {
       jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, {}, (err, user) => {
@@ -11,7 +11,7 @@ const driverAccountManagementController = {
         }
       });
     }
-    const drivers = await Driver.find().select({
+    const users = await User.find().select({
       username: 1,
       phone: 1,
       email: 1,
@@ -20,27 +20,21 @@ const driverAccountManagementController = {
       authMethod: 1,
       isTerminated: 1,
       isAccountVerified: 1,
-      driverVerified: 1,
-      driverDocuments: 1,
-      carColor: 1,
-      carNumber: 1,
     });
 
-    drivers.forEach((driver) => {
-      if (
-        Array.isArray(driver.driverDocuments) &&
-        driver.driverDocuments.length
-      ) {
-        driver.driverDocuments = driver.driverDocuments.map((docPath) =>
-          docPath.replace(/\\/g, "/").replace("backend/uploads", "/uploads")
-        );
+    users.map((user) => {
+      //console.log(user.photo);
+      if (user.photo) {
+        user.photo = user.photo
+          .replace(/\\/g, "/")
+          .replace("backend/uploads", "/uploads");
       }
     });
 
-    res.json(drivers);
+    res.json(users);
   },
 
-  terminateDriver: async (req, res) => {
+  terminateUser: async (req, res) => {
     const { token } = req.cookies;
     const { _id } = req.body;
     if (!token) {
@@ -49,7 +43,7 @@ const driverAccountManagementController = {
     try {
       jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
-      const user = await Driver.findOneAndUpdate(
+      const user = await User.findOneAndUpdate(
         { _id: _id, isTerminated: false },
         { $set: { isTerminated: true } },
         { new: true }
@@ -62,9 +56,6 @@ const driverAccountManagementController = {
         authMethod: 1,
         isTerminated: 1,
         isAccountVerified: 1,
-        driverVerified: 1,
-        carColor: 1,
-        carNumber: 1,
       });
 
       return res.status(201).json(user);
@@ -74,7 +65,7 @@ const driverAccountManagementController = {
     }
   },
 
-  revokeDriverTermination: async (req, res) => {
+  revokeUserTermination: async (req, res) => {
     const { token } = req.cookies;
     const { _id } = req.body;
     if (!token) {
@@ -83,7 +74,7 @@ const driverAccountManagementController = {
     try {
       jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
-      const user = await Driver.findOneAndUpdate(
+      const user = await User.findOneAndUpdate(
         { _id: _id, isTerminated: true },
         { $set: { isTerminated: false } },
         { new: true }
@@ -96,9 +87,6 @@ const driverAccountManagementController = {
         authMethod: 1,
         isTerminated: 1,
         isAccountVerified: 1,
-        driverVerified: 1,
-        carColor: 1,
-        carNumber: 1,
       });
 
       return res.status(201).json(user);
@@ -109,4 +97,4 @@ const driverAccountManagementController = {
   },
 };
 
-export default driverAccountManagementController;
+export default userAccountManagementController;
