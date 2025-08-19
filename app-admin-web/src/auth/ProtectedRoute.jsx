@@ -4,17 +4,17 @@ import { UserContext } from "./UserContext";
 import PrimaryLoadingScreen from "../components/PrimaryLoadingScreen";
 
 function ProtectedRoute({ children, allowedRoles = [] }) {
-  const { user, loading } = useContext(UserContext);
+  const { admin, loading } = useContext(UserContext);
 
   if (loading) {
     return null;
   }
 
-  if (!user) {
+  if (!admin) {
     return <Navigate to="/" />;
   }
 
-  if (allowedRoles.length > 0 && !allowedRoles.includes(user.role)) {
+  if (allowedRoles.length > 0 && !allowedRoles.includes(admin.role)) {
     return <Navigate to="/" replace />;
   }
 

@@ -16,14 +16,14 @@ import { useContext } from "react";
 import Roles from "../auth/roles";
 
 function Navbar() {
-  const { setUser, user } = useContext(UserContext);
+  const { setAdmin, admin } = useContext(UserContext);
   const navigate = useNavigate();
   console.log("Navbar is rendering");
 
   async function handleSignout() {
-    localStorage.removeItem("userData");
+    localStorage.removeItem("adminData");
     await axios.post("/admin/logout", {});
-    setUser(null);
+    setAdmin(null);
     navigate("/", { replace: true });
   }
 
@@ -56,16 +56,16 @@ function Navbar() {
   ];
 
   return (
-    <nav className="bg-black h-dvh flex flex-col items-center py-5 justify-between top-0 bottom-0 sticky">
+    <nav className="sticky top-0 bottom-0 flex h-dvh flex-col items-center justify-between bg-black py-5">
       <header>
-        <img src={Logo} alt="Logo" className="w-[148px] h-[139px]" />
+        <img src={Logo} alt="Logo" className="h-[139px] w-[148px]" />
       </header>
 
-      <div className="flex flex-col min-h-[500px] justify-between ">
+      <div className="flex min-h-[500px] flex-col justify-between">
         {navItems
           .filter(
             (item) =>
-              !item.allowedRole || (user && user.role === item.allowedRole)
+              !item.allowedRole || (admin && admin.role === item.allowedRole),
           )
           .map(({ path, label, Icon }) => {
             return (
