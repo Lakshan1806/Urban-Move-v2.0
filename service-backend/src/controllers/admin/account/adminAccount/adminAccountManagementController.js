@@ -80,11 +80,10 @@ const adminAccountManagementController = {
       role: 1,
     });
     admins.map((admin) => {
-      //console.log(admin.photo)
       if (admin.photo) {
         admin.photo = admin.photo
           .replace(/\\/g, "/")
-          .replace("backend/uploads", "/uploads");
+          .replace("service-backend/src/uploads", "/uploads");
       }
     });
     res.json(admins);
@@ -108,7 +107,7 @@ const adminAccountManagementController = {
       });
       admin.photo = admin.photo
         .replace(/\\/g, "/")
-        .replace("backend/uploads", "/uploads");
+        .replace("src/uploads", "/uploads");
 
       res.json(admin);
     } catch (error) {

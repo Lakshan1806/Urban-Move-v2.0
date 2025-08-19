@@ -5,7 +5,6 @@ import cookieParser from "cookie-parser";
 import adminRoutes from "./routes/adminRoutes.js";
 import { fileURLToPath } from "url";
 
-
 const app = express();
 
 app.use(
