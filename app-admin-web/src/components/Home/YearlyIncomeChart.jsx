@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Chart } from "primereact/chart";
 import axios from "axios";
+import { IoMdRefresh } from "react-icons/io";
 
 function YearlyIncomeChart() {
   const [chartData, setChartData] = useState({});
@@ -56,6 +57,7 @@ function YearlyIncomeChart() {
         options={chartOptions}
         className="w-full h-full"
       />
+      <IoMdRefresh className="absolute top-4 z-30 right-4 cursor-pointer" />
     </>
   );
 }
