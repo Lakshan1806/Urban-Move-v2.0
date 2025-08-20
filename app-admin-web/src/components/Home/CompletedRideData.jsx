@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { Chart } from "primereact/chart";
 import axios from "axios";
+import { IoMdRefresh } from "react-icons/io";
 
 function CompletedRideData() {
   const [chartData, setChartData] = useState({});
   const [chartOptions, setChartOptions] = useState({});
+  const [trigger, setTrigger] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -12,7 +14,7 @@ function CompletedRideData() {
       let response;
       try {
         response = await axios.get("/admin/get_monthly_stats");
-        console.log("graph data",response);
+        console.log("graph data", response);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -74,12 +76,12 @@ function CompletedRideData() {
     };
 
     fetchData();
-    const intervalId = setInterval(fetchData, 10000);
+    const intervalId = setInterval(fetchData, 300000);
     return () => {
       isMounted = false;
       clearInterval(intervalId);
     };
-  }, []);
+  }, [trigger]);
 
   return (
     <>
@@ -88,6 +90,10 @@ function CompletedRideData() {
         data={chartData}
         options={chartOptions}
         className="h-full w-full"
+      />
+      <IoMdRefresh
+        className="absolute top-0 right-0 h-7 w-7 cursor-pointer"
+        onClick={() => setTrigger((t) => !t)}
       />
     </>
   );
