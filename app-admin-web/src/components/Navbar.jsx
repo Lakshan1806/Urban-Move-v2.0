@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import axios from "axios";
-import Logo from "../assets/urban-move-colour.svg";
+import Logo from "../assets/urban-move.svg";
 import { MdOutlineMapsHomeWork } from "react-icons/md";
-import { FaTaxi } from "react-icons/fa6";
 import { TbCarSuvFilled } from "react-icons/tb";
 import { BsPersonBadge } from "react-icons/bs";
 import { BsPersonBadgeFill } from "react-icons/bs";
@@ -18,7 +17,6 @@ import Roles from "../auth/roles";
 function Navbar() {
   const { setAdmin, admin } = useContext(UserContext);
   const navigate = useNavigate();
-  console.log("Navbar is rendering");
 
   async function handleSignout() {
     localStorage.removeItem("adminData");
@@ -56,7 +54,7 @@ function Navbar() {
   ];
 
   return (
-    <nav className="sticky top-0 bottom-0 flex h-dvh flex-col items-center justify-between bg-black py-5">
+    <nav className="flex h-dvh flex-col items-center justify-between bg-gradient-to-t from-[#000000] from-4% via-[#202020] via-72% to-[#FFFFFF] to-100% py-5">
       <header>
         <img src={Logo} alt="Logo" className="h-[139px] w-[148px]" />
       </header>
