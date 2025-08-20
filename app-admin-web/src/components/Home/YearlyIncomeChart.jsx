@@ -6,6 +6,7 @@ import { IoMdRefresh } from "react-icons/io";
 function YearlyIncomeChart() {
   const [chartData, setChartData] = useState({});
   const [chartOptions, setChartOptions] = useState({});
+  const [trigger, setTrigger] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -42,12 +43,12 @@ function YearlyIncomeChart() {
     };
 
     fetchData();
-    const intervalId = setInterval(fetchData, 10000);
+    const intervalId = setInterval(fetchData, 300000);
     return () => {
       isMounted = false;
       clearInterval(intervalId);
     };
-  }, []);
+  }, [trigger]);
 
   return (
     <>
@@ -55,9 +56,12 @@ function YearlyIncomeChart() {
         type="doughnut"
         data={chartData}
         options={chartOptions}
-        className="w-full h-full"
+        className="h-full w-full"
       />
-      <IoMdRefresh className="absolute top-4 z-30 right-4 cursor-pointer" />
+      <IoMdRefresh
+        className="absolute top-[20px] right-[20px] h-7 w-7 cursor-pointer"
+        onClick={() => setTrigger((t) => !t)}
+      />
     </>
   );
 }
