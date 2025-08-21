@@ -91,10 +91,14 @@ function CompletedRideData() {
         options={chartOptions}
         className="h-full w-full"
       />
-      <IoMdRefresh
-        className="absolute top-0 right-0 h-7 w-7 cursor-pointer"
+      <button
+        type="button"
         onClick={() => setTrigger((t) => !t)}
-      />
+        className="group absolute top-0 right-0 rounded-full p-1"
+        aria-label="Refresh"
+      >
+        <IoMdRefresh className="h-6 w-6 cursor-pointer group-active:animate-[spin_0.3s_linear_infinite]" />
+      </button>
     </>
   );
 }

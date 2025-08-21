@@ -27,8 +27,8 @@ function YearlyIncomeChart() {
         datasets: [
           {
             data: [response.data],
-            backgroundColor: ["#ffd12e", "#ff7c1d", "#22C55E"],
-            hoverBackgroundColor: ["#60A5FA", "#FCD34D", "#4ADE80"],
+            backgroundColor: ["#FFD12E", "#ff7c1d"],
+            hoverBackgroundColor: ["#EFC73C", "#FCD34D"],
           },
         ],
       };
@@ -58,10 +58,14 @@ function YearlyIncomeChart() {
         options={chartOptions}
         className="h-full w-full"
       />
-      <IoMdRefresh
-        className="absolute top-[20px] right-[20px] h-7 w-7 cursor-pointer"
+      <button
+        type="button"
         onClick={() => setTrigger((t) => !t)}
-      />
+        className="group absolute top-[20px] right-[20px] rounded-full p-1"
+        aria-label="Refresh"
+      >
+        <IoMdRefresh className="h-6 w-6 cursor-pointer group-active:animate-[spin_0.3s_linear_infinite]" />
+      </button>
     </>
   );
 }
