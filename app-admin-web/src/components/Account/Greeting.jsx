@@ -1,16 +1,19 @@
-const adminData = JSON.parse(localStorage.getItem("adminData") || "{}");
-console.log("adminData:", adminData);
+import { useContext } from "react";
+import { UserContext } from "../../auth/UserContext";
+  
 function Greeting() {
+  const { admin } = useContext(UserContext);
+
   return (
     <div className="absolute top-0 right-0 flex items-center gap-4 px-[50px] py-[20px]">
       <img
         className="h-12 w-12 rounded-full object-cover"
-        src={adminData.photo}
+        src={admin.photo}
         alt="Urban Move Logo"
       />
       <div className="flex flex-col">
         <p className="text-sm font-semibold">Welcome back!</p>
-        <p className="text-lg font-bold">{adminData.username}</p>
+        <p className="text-lg font-bold">{admin.username}</p>
       </div>
     </div>
   );
