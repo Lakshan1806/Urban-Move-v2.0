@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import logo from "../assets/urban-move-colour.svg";
+import logo from "../assets/urban-move.svg";
 
 function NavBar() {
   const navItems = [
@@ -8,21 +8,41 @@ function NavBar() {
     { path: "/rent", label: "Rent" },
     { path: "/ride", label: "Ride" },
     { path: "/drive", label: "Drive" },
+    { path: "/drive", label: "Hire" },
+    { path: "/drive", label: "About" },
+  ];
+
+  const authLinks = [
+    { path: "/signup", label: "Sign Up" },
+    { path: "/signin", label: "Sign In" },
   ];
 
   return (
-    <div className="sticky top-0 flex h-full w-full items-center justify-between bg-black p-4">
-      <div className="flex justify-center">
-        <img src={logo} alt="Logo" className="h-[60px] w-[60px]" />
+    <div className="absolute top-0 flex h-[80px] w-full items-center bg-white/5 px-2 backdrop-blur-md">
+      <div className="flex h-full w-1/3 items-center justify-start">
+        <img src={logo} alt="Logo" className="h-[70px] w-[70px]" />
       </div>
-      <div className="flex gap-5">
+      <div className="flex w-1/3 justify-center gap-5">
         {navItems.map((item) => (
           <Link
             to={item.path}
             key={item.path}
-            className="button-primary uppercase"
+            className="text-grad-stroke text-[20px] font-[500]"
+            data-text={item.label}
           >
             {item.label}
+          </Link>
+        ))}
+      </div>
+      <div className="flex w-1/3 justify-end gap-5">
+        {authLinks.map((item) => (
+          <Link
+            to={item.path}
+            key={item.path}
+            className="button-wrapper text-[16px]"
+            data-text={item.label}
+          >
+            <div className="button-primary">{item.label}</div>
           </Link>
         ))}
       </div>
