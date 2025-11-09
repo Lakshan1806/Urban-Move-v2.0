@@ -1,0 +1,12 @@
+services:
+  service-backend:
+    build:
+      context: ./service-backend
+    container_name: service-backend
+    ports:
+      - "5000:5000"  
+    env_file:
+      - ./service-backend/.env
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
