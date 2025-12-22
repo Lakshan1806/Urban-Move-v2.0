@@ -210,7 +210,7 @@ No `.env` usage. Admin and customer web apps hardcode API base URL to `http://lo
   - app-customer-mobile: `npm run lint`
   - services/administration-service, services/auth-service, app-driver-mobile: TBD (no lint scripts found)
 
-## API Documentation (if backend exists)
+## API Documentation
 
 - Base URL: `http://localhost:5000`
 - Auth method: JWT signed with `ACCESS_TOKEN_SECRET` stored in httpOnly cookie `token` set by `/admin/login`.
